@@ -7,3 +7,4 @@ Big thank you to 3blue1brown and the Manim community.
 These features can be found in the `custom.py` module.
 
 - `CodeTransformer`: rewrite parts of code on screen without transforming the rest of the code.
+- `octicon`: Easily include any icon from GitHub's octicon library.

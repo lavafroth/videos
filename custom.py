@@ -1,4 +1,4 @@
-from manim import VMobject, Code, VGroup, AnimationGroup, Write, Transform, Unwrite
+from manim import VMobject, Code, VGroup, AnimationGroup, Write, Transform, Unwrite, SVGMobject
 from dataclasses import dataclass
 from typing import Optional, List, Any
 from difflib import SequenceMatcher
@@ -118,4 +118,25 @@ class CodeTransformer:
                 for x in range(j0, j1):
                     writes.append(Write(self.end.chunks[x].chunk))
 
-        return AnimationGroup(writes, lag_ratio=self.lag_ratio)
+    def rewrites(self) -> AnimationGroup:
+        return AnimationGroup(
+            (Write(x) for x in self.rewritables()),
+            lag_ratio=self.lag_ratio
+        )
+
+    def ingest(self, end: Union[str, Code], breakpoints: Optional[List[int]] = None, **kwargs):
+        self.start = self.post
+        if isinstance(end, Code):
+            self.end = CodeToVMobjectMapper(end).into_chunks(breakpoints)
+        else:
+            self.end = RawToVMobjectMapper(end, **kwargs).into_chunks(breakpoints)  
+        
+        sequence_matcher = SequenceMatcher(None, self.start.tokens(), self.end.tokens())
+        self.diffs = list(sequence_matcher.get_opcodes())
+        self.post = copy(self.end)
+        self._committed_transformation = False
+
+
+def octicon(name: str, *args, **kwargs) -> SVGMobject:
+    from os import path
+    return SVGMobject(path.join(path.dirname(__file__), 'octicons', 'icons', name), *args, **kwargs)
