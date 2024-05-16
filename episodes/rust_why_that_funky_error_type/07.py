@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env manim
 # coding: utf-8
 
 from manim import *

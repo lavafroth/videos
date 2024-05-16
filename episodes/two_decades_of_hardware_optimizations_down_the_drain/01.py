@@ -1,9 +1,6 @@
 #!/usr/bin/env manim
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from custom import octicon
 from manim import *
+from hackermanim import *
 
 class Sc(Scene):
     def construct(self):

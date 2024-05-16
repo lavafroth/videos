@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 from manim import *
-from custom import CodeTransformer
+from hackermanim import *
 
 def whitespace_indices(s: str) -> List[int]:
     return [i for i, c in enumerate(s) if c.isspace()]

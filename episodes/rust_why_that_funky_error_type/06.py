@@ -1,11 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env manim
 # coding: utf-8
 
 from manim import *
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from custom import octicon
+from hackermanim import *
 
 class ErrorSizes(Scene):
     def construct(self):

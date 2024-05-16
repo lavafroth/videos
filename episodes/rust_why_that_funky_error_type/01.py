@@ -2,7 +2,7 @@
 # coding: utf-8
 
 from manim import *
-from custom import *
+from hackermanim import *
 from typing import List
 
 def whitespace_indices(s: str) -> List[int]:
