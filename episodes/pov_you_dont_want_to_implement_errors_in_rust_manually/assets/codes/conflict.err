@@ -1,0 +1,7 @@
+error: #[from] is only supported on the source field, not any other field
+ --> src/main.rs:6:9
+  |
+6 |         #[from]
+  |         ^^^^^^^
+
+error: could not compile `demo` (bin "demo") due to 1 previous error
