@@ -7,7 +7,7 @@ class Sc(Scene):
         Code.set_default(font="Terminess Nerd Font Propo", style='monokai')
         bench = Code('benchmark_init.rs')[2]
         self.play(FadeIn(bench))
-        ferris = SVGMobject('rustacean-flat-gesture').scale(.8).shift(4 * RIGHT)
+        ferris = SVGMobject('../assets/rustacean-flat-gesture').scale(.8).shift(4 * RIGHT)
         ferris_old = ferris.copy().shift(RIGHT).set_opacity(0)
         self.play(Transform(ferris_old, ferris))
         ferris = ferris_old
@@ -16,7 +16,7 @@ class Sc(Scene):
         box_dyn = bench[1][start:end]
         box_dyn_ = box_dyn.copy().scale(1.5).move_to(ORIGIN)
         group = Group(bench[1][:start], bench[1][end:], bench[0], bench[2:])
-        ferris_down = SVGMobject('rustacean-flat-gesture-down').scale(.8).shift(4 * RIGHT)
+        ferris_down = SVGMobject('../assets/rustacean-flat-gesture-down').scale(.8).shift(4 * RIGHT)
         self.play(FadeOut(group), Transform(ferris, ferris_down), Transform(box_dyn, box_dyn_))
         self.wait(6)
         self.play(box_dyn.animate.to_edge(UP))

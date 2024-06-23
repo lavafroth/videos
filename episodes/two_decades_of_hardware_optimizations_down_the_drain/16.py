@@ -20,7 +20,7 @@ class Sc(Scene):
         l_copy = l.copy()
         r_copy = r.copy()
 
-        ferris = SVGMobject('rustacean-flat-gesture').scale(.6).shift(4.5 * RIGHT)
+        ferris = SVGMobject('../assets/rustacean-flat-gesture').scale(.6).shift(4.5 * RIGHT)
         ferris_old = ferris.copy().shift(RIGHT).set_opacity(0)
         self.play(Transform(ferris_old, ferris))
         boxes = Rectangle(
@@ -31,7 +31,7 @@ class Sc(Scene):
             fill_color=BLUE,
             color=BLUE,
         )
-        ferris_down = SVGMobject('rustacean-flat-gesture-down').scale(.6).shift(4.5 * RIGHT)
+        ferris_down = SVGMobject('../assets/rustacean-flat-gesture-down').scale(.6).shift(4.5 * RIGHT)
         self.play(
             Transform(shape, boxes),
             Transform(ferris_old, ferris_down),

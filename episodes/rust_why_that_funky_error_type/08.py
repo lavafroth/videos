@@ -5,7 +5,7 @@ from manim import *
 
 class Convinced(Scene):
     def construct(self):
-        ferris_thinking = SVGMobject('rustacean-flat-gesture.svg').shift(3 * LEFT)
+        ferris_thinking = SVGMobject('../assets/rustacean-flat-gesture.svg').shift(3 * LEFT)
         reject = SVGMobject('1faf8.svg').scale(0.5).shift(0.5 * RIGHT)
         _reject = reject.copy().set_opacity(0).shift(0.5 * LEFT)
         code = Code(code='struct', language='rust', font_size=40)[2][0].shift(3*RIGHT)

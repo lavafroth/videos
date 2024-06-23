@@ -29,7 +29,7 @@ class ErrorSizes(Scene):
             Transform(dyn_error, rect),
             closing.animate.shift(6 * RIGHT),
         ))
-        ferris = SVGMobject('rustacean-flat-gesture').rotate(0.8 * PI).to_edge(UR).shift(0.5 * (UP + RIGHT))
+        ferris = SVGMobject('../assets/rustacean-flat-gesture').rotate(0.8 * PI).to_edge(UR).shift(0.5 * (UP + RIGHT))
         self.play(FadeIn(ferris))
         self.wait(2)
         rect = Rectangle(width=4, height=1, color=TEAL_D, fill_color=TEAL_D, fill_opacity=0.8).shift(2 * (DL))

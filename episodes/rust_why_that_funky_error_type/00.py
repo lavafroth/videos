@@ -4,7 +4,7 @@ from manim import *
 class Sc(Scene):
     def construct(self):
         uni = SVGMobject('university-svgrepo-com', fill_color=BLUE, fill_opacity=0.8).shift(3* LEFT)
-        rust = SVGMobject('rustacean-flat-noshadow').shift(3*RIGHT)
+        rust = SVGMobject('../assets/rustacean-flat-noshadow').shift(3*RIGHT)
         arrow = Arrow(start=2 * LEFT, end=1.6*RIGHT)
         self.play(AnimationGroup(
             Write(uni),

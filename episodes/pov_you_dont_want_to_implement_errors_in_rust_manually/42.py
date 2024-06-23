@@ -52,7 +52,7 @@ pub enum MyError {
             line.set(color=RED)
             line.set_opacity(1)
 
-        ferris = SVGMobject("rustacean-flat-gesture-down").scale(0.8).shift(5 * RIGHT)
+        ferris = SVGMobject("../assets/rustacean-flat-gesture-down").scale(0.8).shift(5 * RIGHT)
         self.add(ferris, c3)
 
         self.play(

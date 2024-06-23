@@ -4,7 +4,7 @@ from manim import *
 
 class Problem(Scene):
     def construct(self):
-        ferris = SVGMobject('rustacean-flat-gesture.svg').scale(0.5).to_edge(LEFT)
+        ferris = SVGMobject('../assets/rustacean-flat-gesture.svg').scale(0.5).to_edge(LEFT)
         header_sep = Line(start=4.6 * LEFT, end=10*RIGHT)
         sep = Line(start=10 * UP, end=10*DOWN).to_edge(LEFT).shift(2 * RIGHT)
         self.play(AnimationGroup(
@@ -50,7 +50,7 @@ class Problem(Scene):
         self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
         self.wait(4)
         self.play(AnimationGroup([FadeOut(x) for x in (net, log, net_impl, log_impl, header_sep, sep)]))
-        _ferris = SVGMobject('rustacean-flat-gesture.svg')
+        _ferris = SVGMobject('../assets/rustacean-flat-gesture.svg')
         qs = []
         for x in range(3):
             phaser = np.sin(x/3 * PI)

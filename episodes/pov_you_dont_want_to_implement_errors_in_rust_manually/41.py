@@ -25,8 +25,8 @@ pub enum MyError {
         self.play(c1.animate.to_edge(LEFT))
         gz = (c1[:3], c1[5:])
 
-        ferris = SVGMobject('rustacean-flat-gesture').scale(.8).shift(5 * RIGHT).shift(8 * RIGHT)
-        ferris_gesture_down = SVGMobject('rustacean-flat-gesture-down').scale(.8).shift(5 * RIGHT)
+        ferris = SVGMobject('../assets/rustacean-flat-gesture').scale(.8).shift(5 * RIGHT).shift(8 * RIGHT)
+        ferris_gesture_down = SVGMobject('../assets/rustacean-flat-gesture-down').scale(.8).shift(5 * RIGHT)
 
         self.play(
             (x.animate.set_opacity(0.5) for x in gz),

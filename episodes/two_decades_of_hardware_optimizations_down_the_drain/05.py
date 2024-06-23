@@ -6,8 +6,8 @@ class Sc(Scene):
         Text.set_default(font="Poppins")
         Code.set_default(font="Terminess Nerd Font Propo", style='monokai')
         
-        ferris = SVGMobject('rustacean-flat-gesture').scale(.8).shift(4 * RIGHT)
-        ferris_gesture_down = SVGMobject('rustacean-flat-gesture-down').scale(.8).shift(4 * RIGHT)
+        ferris = SVGMobject('../assets/rustacean-flat-gesture').scale(.8).shift(4 * RIGHT)
+        ferris_gesture_down = SVGMobject('../assets/rustacean-flat-gesture-down').scale(.8).shift(4 * RIGHT)
         code = Code('trait_definitions.rs', font_size=34).shift(2 * LEFT)[2]
         self.add(ferris, code)
         text = Text("Polymorphism").shift(2*LEFT)

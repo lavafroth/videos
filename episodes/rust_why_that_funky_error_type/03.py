@@ -73,7 +73,7 @@ class EnumBlock(Scene):
         self.wait(2)
         self.play(FadeOut(Group(function, arrow)))
         self.wait(4)
-        ferris = SVGMobject('rustacean-flat-gesture').shift(3 * RIGHT)
+        ferris = SVGMobject('../assets/rustacean-flat-gesture').shift(3 * RIGHT)
         self.play(FadeIn(ferris))
 
         highlight = []

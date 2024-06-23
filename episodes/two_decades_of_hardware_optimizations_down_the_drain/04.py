@@ -6,8 +6,8 @@ class Sc(Scene):
         Text.set_default(font="Poppins")
         Code.set_default(font="Terminess Nerd Font Propo", style='monokai')
         
-        ferris = SVGMobject('rustacean-flat-noshadow')
-        ferris_gesture = SVGMobject('rustacean-flat-gesture').scale(.8).shift(4 * RIGHT)
+        ferris = SVGMobject('../assets/rustacean-flat-noshadow')
+        ferris_gesture = SVGMobject('../assets/rustacean-flat-gesture').scale(.8).shift(4 * RIGHT)
         self.play(FadeIn(ferris))
         self.wait(4)
         self.play(Transform(ferris, ferris_gesture))
