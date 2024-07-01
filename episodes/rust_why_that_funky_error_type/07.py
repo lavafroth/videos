@@ -2,6 +2,7 @@
 # coding: utf-8
 
 from manim import *
+from hackermanim import *
 
 class TraitIntro(Scene):
     def construct(self):
@@ -45,15 +46,8 @@ class TraitIntro(Scene):
             trait_def.animate.shift(2 * UP),
             Write(decl),
         )
-        anims = []
-        for char in decl[len('let e: Box<dyn std::error::Error> = Box::new('):len('let e: Box<dyn std::error::Error> = Box::new(CustomStruct')]:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
+        _ripple_decl_thing = decl[len('let e: Box<dyn std::error::Error> = Box::new('):len('let e: Box<dyn std::error::Error> = Box::new(CustomStruct')]
+        self.play(ripple(_ripple_decl_thing), run_time=1)
         self.wait(2)
-        anims = []
-        for char in method:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=3)
+        self.play(ripple(method), run_time=3)
         self.wait(4)

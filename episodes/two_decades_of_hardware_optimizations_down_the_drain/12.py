@@ -1,6 +1,8 @@
 #!/usr/bin/env manim
 # coding: utf-8
 from manim import *
+from hackermanim import *
+
 class Sc(Scene):
     def construct(self):
         Text.set_default(font="Poppins")
@@ -65,12 +67,7 @@ class Sc(Scene):
             Transform(arrow, _arrow),
         ))
 
-        data_ripple = trait_object[:4]
-        anims = []
-        for char in data_ripple:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
+        self.play(ripple(trait_object[:4]), run_time=1)
 
         # resize the box now
         data_c = data.copy()
@@ -99,34 +96,22 @@ class Sc(Scene):
         self.play(Transform(vtable, _vtable))
 
         self.wait(8)
-        anims = []
-        for char in trait_object[4:]: # for the vtable text
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
+        self.play(ripple(trait_object[4:]), run_time=1)
 
         curve = ParametricFunction(lambda t: np.array([0.1 * np.sin(PI * t), 0, 0]), t_range=[0, 2]).move_to(arrow_1.get_center())
         self.play(MoveAlongPath(arrow_1, curve), run_time=1)
         self.wait(1)
 
-        anims = []
-        for char in fmt:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
+        self.play(ripple(fmt), run_time=1)
         self.wait(1)
 
         curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 2]).move_to(arrow_2.get_center())
         self.play(MoveAlongPath(arrow_2, curve))
         self.wait(1)
 
-        anims = []
-        for char in machine_code:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
-        self.wait(1)
-        self.wait(2)
+        self.play(ripple(machine_code), run_time=1)
+        self.wait(3)
+
         poly = Text("Polymorphism").shift(3 * LEFT)
         self.play((FadeOut(x) for x in (
             vtable, arrow_2, arrow_1, arrow, data, heap, machine_code, text

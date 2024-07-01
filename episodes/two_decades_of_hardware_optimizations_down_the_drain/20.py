@@ -1,5 +1,6 @@
 #!/usr/bin/env manim
 from manim import *
+from hackermanim import *
 
 class Sc(Scene):
     def construct(self):
@@ -32,17 +33,8 @@ class Sc(Scene):
         }
     }''', language='rust', font_size=22)[2]
         self.add(impl)
-        anims = []
-        for char in impl[4]:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1.5)
-        anims = []
-
+        self.play(ripple(impl[4]), run_time=1.5)
         self.wait(1)
 
-        for char in impl[19]:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1.5)
+        self.play(ripple(impl[19]), run_time=1.5)
         self.play(FadeOut(impl))

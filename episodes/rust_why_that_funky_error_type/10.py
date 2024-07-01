@@ -2,6 +2,7 @@
 # coding: utf-8
 
 from manim import *
+from hackermanim import *
 
 class Convinced(Scene):
     def construct(self):
@@ -78,18 +79,10 @@ class Convinced(Scene):
         self.play(Transform(vtable, dispatch))
         self.wait(3)
         self.play(Transform(vtable, _vtable))
-        anims = []
-        for char in fmt:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
+        self.play(ripple(fmt), run_time=1)
         
         self.wait(2)
-        anims = []
-        for char in machine_code:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
+        self.play(ripple(machine_code), run_time=1)
         self.wait(2)
         self.play(AnimationGroup(
             [FadeOut(x) for x in (

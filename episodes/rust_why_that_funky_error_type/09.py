@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 from manim import *
+from hackermanim import *
 
 class Problem(Scene):
     def construct(self):
@@ -37,17 +38,9 @@ class Problem(Scene):
             Write(log_impl)
         ))
         self.wait(2)
-        anims = []
-        for char in net:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
+        self.play(ripple(net), run_time=1)
         self.wait(2)
-        anims = []
-        for char in log:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
+        self.play(ripple(log), run_time=1)
         self.wait(4)
         self.play(AnimationGroup([FadeOut(x) for x in (net, log, net_impl, log_impl, header_sep, sep)]))
         _ferris = SVGMobject('../assets/rustacean-flat-gesture.svg')

@@ -23,12 +23,7 @@ test m01_trait::tests::total_area                  ... bench:      54,956 ns/ite
         self.play(Write(text))
 
         nsiter = text[-21:-8]
-        curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1])
-        anims = []
-        for char in nsiter:
-            curve = curve.copy().move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
+        self.play(ripple(nsiter), run_time=1)
         self.wait(2)
         _nsiter = Text('54,956 ns/iter', font='Terminess Nerd Font Propo')
         self.play(FadeOut(text[:-21]), FadeOut(text[-8:]), Transform(nsiter, _nsiter), FadeOut(line))

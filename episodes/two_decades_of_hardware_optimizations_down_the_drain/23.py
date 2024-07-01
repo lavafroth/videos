@@ -1,5 +1,6 @@
 #!/usr/bin/env manim
 from manim import *
+from hackermanim import *
 
 class Sc(Scene):
     def construct(self):
@@ -80,11 +81,7 @@ INFO: Use -AA or aaaa to perform additional experimental analysis""",
         grp.add(logs)
         self.play(Write(logs))
         self.wait(4)
-        anims = []
-        for char in logs[:10]:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
+        self.play(ripple(logs[:10]), run_time=1)
         self.wait(1)
         pr = (
             Text(

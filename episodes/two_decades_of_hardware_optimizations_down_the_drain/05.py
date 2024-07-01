@@ -1,5 +1,6 @@
 #!/usr/bin/env manim
 from manim import *
+from hackermanim import *
 
 class Sc(Scene):
     def construct(self):
@@ -31,26 +32,10 @@ class Sc(Scene):
         code = Code('trait_version_overview.rs', font_size=28).shift(2 * LEFT)[2]
         self.play(Transform(grp, code))
 
-        curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1])
-        ripples = []
-        for line in (0, 4):
-            anims = []
-            for char in grp[line][:13]:
-                curve = curve.copy().move_to(char.get_center() + 0.05 * UP)
-                anims.append(MoveAlongPath(char, curve))
-            ripples.append(AnimationGroup(anims, lag_ratio=0.1))
-        self.play(*ripples, run_time=1.5)
-
+        self.play((ripple(grp[line][:13]) for line in (0, 4)), run_time=1.5)
         self.wait(1)
 
-        ripples = []
-        for line in (9, 15):
-            anims = []
-            for char in grp[line][:-1]:
-                curve = curve.copy().move_to(char.get_center() + 0.05 * UP)
-                anims.append(MoveAlongPath(char, curve))
-            ripples.append(AnimationGroup(anims, lag_ratio=0.1))
-        self.play(*ripples, run_time=1.5)
-
+        self.play((ripple(grp[line][:-1]) for line in (9, 15)), run_time=1.5)
         self.wait(2)
+
         self.play(FadeOut(grp), FadeOut(ferris))

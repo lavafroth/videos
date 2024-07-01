@@ -2,6 +2,7 @@
 # coding: utf-8
 
 from manim import *
+from hackermanim import *
 
 class Convinced(Scene):
     def construct(self):
@@ -39,14 +40,9 @@ class Convinced(Scene):
                 lag_ratio=0.7,
             ),
         )
-        
         self.wait(2)
         
-        anims = []
-        for char in trait_object[:4]:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
+        self.play(ripple(trait_object[:4]), run_time=1)
         
         data_c = data.copy()
         self.play(Transform(data, Rectangle(width=1, height=1, color=TEAL_D, fill_color=TEAL_D, fill_opacity=0.3).move_to(
@@ -57,13 +53,9 @@ class Convinced(Scene):
         )))
         self.play(Transform(data, data_c))
         self.wait(2)
-        
-        anims = []
-        for char in text[3:]:
-            curve = ParametricFunction(lambda t: np.array([0, 0.1 * np.sin(PI * t), 0]), t_range=[0, 1]).move_to(char.get_center() + 0.05 * UP)
-            anims.append(MoveAlongPath(char, curve))
-        self.play(AnimationGroup(anims, lag_ratio=0.1), run_time=1)
-        
+
+        self.play(ripple(text[3:]), run_time=1)
+    
         machine_code = Text("machine\ncode", font='monospace', font_size=34).to_edge(DL)
         arrow_2 = Arrow(start=text.get_center() + 0.5 * LEFT + 0.2 * DOWN, end=text.get_center() + 4 * LEFT + 0.2 * DOWN)
         self.play(AnimationGroup(
