@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="800px"
+   height="800px"
+   viewBox="0 0 36 36"
+   aria-hidden="true"
+   role="img"
+   class="iconify iconify--twemoji"
+   preserveAspectRatio="xMidYMid meet"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="eyes_up.svg"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.1711456"
+     inkscape:cx="404.30498"
+     inkscape:cy="383.38529"
+     inkscape:window-width="1890"
+     inkscape:window-height="1052"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <ellipse
+     fill="#F5F8FA"
+     cx="8.828"
+     cy="18"
+     rx="7.953"
+     ry="13.281"
+     id="ellipse1" />
+  <path
+     fill="#E1E8ED"
+     d="M8.828 32.031C3.948 32.031.125 25.868.125 18S3.948 3.969 8.828 3.969S17.531 10.132 17.531 18s-3.823 14.031-8.703 14.031zm0-26.562C4.856 5.469 1.625 11.09 1.625 18s3.231 12.531 7.203 12.531S16.031 24.91 16.031 18S12.8 5.469 8.828 5.469z"
+     id="path1" />
+  <circle
+     fill="#8899a6"
+     cx="8.8333864"
+     cy="10.475236"
+     r="4.96"
+     id="circle1" />
+  <circle
+     fill="#292f33"
+     cx="8.8333864"
+     cy="10.475236"
+     r="3.5650001"
+     id="circle2" />
+  <circle
+     fill="#f5f8fa"
+     cx="11.513535"
+     cy="10.549973"
+     r="1.426"
+     id="circle3" />
+  <ellipse
+     fill="#F5F8FA"
+     cx="27.234"
+     cy="18"
+     rx="7.953"
+     ry="13.281"
+     id="ellipse3" />
+  <path
+     fill="#E1E8ED"
+     d="M27.234 32.031c-4.88 0-8.703-6.163-8.703-14.031s3.823-14.031 8.703-14.031S35.938 10.132 35.938 18s-3.824 14.031-8.704 14.031zm0-26.562c-3.972 0-7.203 5.622-7.203 12.531c0 6.91 3.231 12.531 7.203 12.531S34.438 24.91 34.438 18S31.206 5.469 27.234 5.469z"
+     id="path3" />
+  <circle
+     fill="#8899a6"
+     cx="27.239388"
+     cy="10.475236"
+     r="4.96"
+     id="circle4" />
+  <circle
+     fill="#292f33"
+     cx="27.239388"
+     cy="10.475236"
+     r="3.5650001"
+     id="circle5" />
+  <circle
+     fill="#f5f8fa"
+     cx="29.919537"
+     cy="10.549973"
+     r="1.426"
+     id="circle6" />
+</svg>
