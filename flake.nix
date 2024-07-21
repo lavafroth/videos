@@ -11,17 +11,20 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             manim
-            ffmpeg
+            ffmpeg-full
+            kdenlive
             (writeScriptBin "new" ''
             cat << EOF > "$1.py"
             #!/usr/bin/env manim
             from manim import *
+            from manim import Transform as T, ReplacementTransform as RT
             from hackermanim import *
+            codefont = "Terminess Nerd Font Propo"
 
             class Sc(Scene):
                 def construct(self):
                     Text.set_default(font="Poppins")
-                    Code.set_default(font="Terminess Nerd Font Propo", style="monokai")
+                    Code.set_default(font=codefont, style="monokai")
             EOF
             $EDITOR "$1.py"
             '')
