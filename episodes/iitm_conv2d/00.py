@@ -1,6 +1,9 @@
 #!/usr/bin/env manim
-from manim import *
+from manim import Text, VGroup
+from typing import List
 
+# this import's a catchall for experimenting around
+from manim import *
 
 np.random.seed(42)
 
@@ -24,7 +27,6 @@ def new_tensor(
         for col in range(width + 2 * padding):
             pixel = Rectangle(height=1, width=1, grid_xstep=1, grid_ystep=1, **kwargs)
             value = Text(str(tensor_padded[row, col])).scale(0.75)
-            # print(value)
             if (
                 row < padding
                 or row > height - 1 + padding
@@ -49,7 +51,7 @@ def new_tensor(
                     + 0.2 * UL
                 )
 
-            value.set_opacity(text_opacity)
+            value.set_opacity(text_opacity).set_z_index(2)
             pixel_with_value = VGroup(pixel, value)
             col_group.add(pixel_with_value)
         col_group.arrange(buff=0)
@@ -57,6 +59,33 @@ def new_tensor(
     row_group.arrange(direction=DOWN, buff=0)
     return row_group
 
+def tensor_values_under_kernel(padded_tensor: VGroup, output_col_m1: int, output_row: int, stride: int, kernel_size: int) -> List[Text, Text]:
+    truthy = []
+    falsy = []
+    for i, t_row in enumerate(padded_tensor):
+        for j, t_val in enumerate(t_row):
+            t_val = iter(t_val)
+            _cell = next(t_val)
+            text = next(t_val)
+            if (
+                output_row * stride <= i < (output_row) * stride + kernel_size
+                and (output_col_m1 + 1) * stride <= j < (output_col_m1 + 1) * stride + kernel_size
+            ):
+                truthy.append(text)
+            else:
+                falsy.append(text)
+    
+    return (truthy, falsy)
+
+def tensor_values(tensor: VGroup) -> List[Text]:
+    values = []
+    for k_row in tensor:
+        for k_val in k_row:
+            k_val = iter(k_val)
+            _cell = next(k_val)
+            text = next(k_val)
+            values.append(text)
+    return values
 
 class ThreeDCameraRotation(ThreeDScene):
     def construct(self):
@@ -110,45 +139,39 @@ class ThreeDCameraRotation(ThreeDScene):
 
         dangling_animations = []
         for row in range(output_size):
+            truthy, falsy = tensor_values_under_kernel(tensor, -1, row, stride, kernel_size)
 
-            anims = []
-            for i, t_row in enumerate(tensor):
-                for j, t_val in enumerate(t_row):
-                    t_val = iter(t_val)
-                    _cell = next(t_val)
-                    text = next(t_val)
-                    if (
-                        row * stride <= i < (row) * stride + kernel_size
-                        and 0 <= j < kernel_size
-                    ):
-                        print(f"got one: {i}, {j}")
-                        dangling_animations.append(text.animate.set_opacity(1))
-                    else:
-                        dangling_animations.append(text.animate.set_opacity(0))
+            dangling_animations.extend((value.animate.set_opacity(1) for value in truthy))
+            dangling_animations.extend((value.animate.set_opacity(0) for value in falsy))
 
             self.play(*dangling_animations)
+
+            for op_a, op_b in zip(tensor_values(kernel), truthy):
+                self.play(op_b.animate.set_opacity(0), op_a.animate.set_opacity(0))
+
             dangling_animations.clear()
             self.wait()
+
+            # Bring the kernel values back on screen
+            self.play(value.animate.set_opacity(1) for value in tensor_values(kernel))
+
             kernel_original_pos = kernel.copy()
 
             for col in range(output_size - 1):
                 anims = []
-                for i, t_row in enumerate(tensor):
-                    for j, t_val in enumerate(t_row):
-                        t_val = iter(t_val)
-                        _cell = next(t_val)
-                        text = next(t_val)
-                        if (
-                            (row) * stride <= i < (row) * stride + kernel_size
-                            and (col + 1) * stride <= j < (col + 1) * stride + kernel_size
-                        ):
-                            print(f"got one: {i}, {j}")
-                            anims.append(text.animate.set_opacity(1))
-                        else:
-                            anims.append(text.animate.set_opacity(0))
-
+                truthy, falsy = tensor_values_under_kernel(tensor, col, row, stride, kernel_size)
+                anims.extend((value.animate.set_opacity(1) for value in truthy))
+                anims.extend((value.animate.set_opacity(0) for value in falsy))
+                
                 self.play(kernel.animate.shift(RIGHT * stride), *anims)
+
+                for op_a, op_b in zip(tensor_values(kernel), truthy):
+                    self.play(op_b.animate.set_opacity(0), op_a.animate.set_opacity(0))
+
                 self.wait()
+
+                # Bring the kernel values back on screen
+                self.play(value.animate.set_opacity(1) for value in tensor_values(kernel))
 
             # don't move the filter down the last time
             if row == output_size - 1:
