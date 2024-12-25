@@ -1,10 +1,13 @@
 #!/usr/bin/env manim
-from manim import Text, VGroup, Transform, Rectangle, DashedVMobject, np, Write, ReplacementTransform, FadeOut, UP, DOWN, LEFT, RIGHT, Scene
+from manim import Text, VGroup, Transform, Rectangle, DashedVMobject, np, Write, ReplacementTransform, FadeOut, UP, DOWN, LEFT, RIGHT, Scene, Tex, UL, DR, UR, DL, FadeIn
 from typing import List, Tuple
+
+# I come from a procedural / imperative programming background
+# and prefer structs to classes.
 from dataclasses import dataclass
 
 # this import's a catchall for experimenting around
-from manim import *
+# from manim import *
 
 np.random.seed(42)
 
@@ -18,7 +21,7 @@ class Tensor:
     representation: VGroup
     matrix: np.array
 
-# Generally in case of a quadratic input size, the width equals the height
+    # Generally in case of a quadratic input size, the width equals the height
     def new(
         width: int,
         height: int | None = None,
@@ -156,8 +159,8 @@ class Sc(Scene):
         speed_up_factor = last_run_time ** (-1/(output_size ** 2))
 
         theta = np.pi/4
-        gamma = 0.7
-        fake_3d = lambda p: fake_isometry(p, theta, gamma)  # noqa: E731
+        gamma = 1.0995574287564276
+        fake_3d = lambda p: fake_isometry(p, theta, gamma/(np.pi/2))  # noqa: E731
 
         self.add(
             VGroup(
