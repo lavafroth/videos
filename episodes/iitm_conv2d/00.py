@@ -109,7 +109,7 @@ def fake_isometry(p, theta: float, gamma: float):
         p[2]
     ])
 
-def anim_dot_product(scene: Scene, row, col, kernel: Tensor, truthy, output: Tensor, bottom_line: Text, run_time: float, bottom_line_val: Text):
+def anim_dot_product(scene: Scene, row: int, col: int, kernel: Tensor, truthy, output: Tensor, bottom_line: Text, bottom_line_val: Text, run_time: float):
     dot_product = 0
     for op_a, op_b in zip(kernel.values(), truthy):
         op_a_str = str(op_a.value)
@@ -223,13 +223,13 @@ class Sc(Scene):
             dangling_animations.extend((value.text.animate.set_opacity(1) for value in truthy))
             dangling_animations.extend((value.text.animate.set_opacity(0) for value in falsy))
 
-            self.play(*dangling_animations)
+            self.play(dangling_animations, run_time=run_time)
 
-            bottom_line_val = anim_dot_product(self, row, col, kernel, truthy, output, bottom_line, run_time, bottom_line_val)
+            bottom_line_val = anim_dot_product(self, row, col, kernel, truthy, output, bottom_line, bottom_line_val, run_time)
             run_time /= speed_up_factor
 
             # Bring the kernel values back on screen
-            self.play(value.text.animate.set_opacity(1) for value in kernel.values())
+            self.play((value.text.animate.set_opacity(1) for value in kernel.values()), run_time=run_time)
 
             kernel_original_pos = kernel.representation.copy()
 
@@ -238,14 +238,15 @@ class Sc(Scene):
                 truthy, falsy = tensor.values_under_kernel(col, row, stride, kernel_size)
                 anims.extend((value.text.animate.set_opacity(1) for value in truthy))
                 anims.extend((value.text.animate.set_opacity(0) for value in falsy))
-                
-                self.play(kernel.representation.animate.shift(fake_3d(RIGHT) * stride), *anims)
+                anims.append(kernel.representation.animate.shift(fake_3d(RIGHT) * stride))
 
-                bottom_line_val = anim_dot_product(self, row, col, kernel, truthy, output, bottom_line, run_time, bottom_line_val)
+                self.play(anims, run_time=run_time)
+
+                bottom_line_val = anim_dot_product(self, row, col, kernel, truthy, output, bottom_line, bottom_line_val, run_time)
                 # Bring the kernel values back on screen
-                self.play(value.text.animate.set_opacity(1) for value in kernel.values())
-
+                self.play((value.text.animate.set_opacity(1) for value in kernel.values()), run_time=run_time)
             run_time /= speed_up_factor
+
             # don't move the filter down the last time
             if row == output_size - 1:
                 break
