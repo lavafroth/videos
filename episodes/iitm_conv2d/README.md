@@ -1,5 +1,9 @@
 # Visualizing a 2D convolution
 
+![A preview of the rendered animation](preview.gif)
+
+> Note: This is just a preview, the entire animation lasts as long as the convolution itself.
+
 ## Getting Started
 
 - Install manim
